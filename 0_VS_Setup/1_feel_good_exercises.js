@@ -2,7 +2,7 @@
 // Let's get familiar with VS Code. //
 //////////////////////////////////////
 
-// Note: this code is relevant only for the editor Visual Studio Code.
+// e: this code is relevant only for the editor Visual Studio Code.
 // https://code.visualstudio.com/
 
 // All the text that follows a double "slash", that is //, is a comment.
@@ -55,10 +55,10 @@
 // a. Hint: follow the pattern.
 a = 1
 b = 2
-c.= 3
+c = 3
 
 // b. Hint: This function needs a name after the word function.
-function () {
+function word_func() {
     console.log('Hello!');
 }
 
@@ -72,10 +72,10 @@ function () {
 // Here we just learn a couple of useful tricks.
 
 // a. Comment out useless code with Ctrl-/ Ctrl-/ (Linux/Windows) 
-// or Cmd-/ (Mac). Notice if you apply the command multiple times, it will
+// or Cmd-/ (Mac). ice if you apply the command multiple times, it will
 // uncomment/comment/uncomment... it.
 
-uselessCode = 'I am useless';
+// uselessCode = 'I am useless';
 
 // b. Cool. What other shorcuts are available? Here is a shortcut to find
 // them all. Ctrl-Shift-P. Look around and remember how to get here,
@@ -83,21 +83,21 @@ uselessCode = 'I am useless';
 
 // c. It would great if we could have a clone of ourselves, or even better 
 // multiple clones. It turns out that you can do it in VS Code! Highlight
-// the word "not". Then press Ctrl-D as many times as needed to highlight
-// all the next occurrences of the word "not". At every word "not" there is
-// a new cursor, so you can write multiple rows at once. Delete the word "not"
+// the word "". Then press Ctrl-D as many times as needed to highlight
+// all the next occurrences of the word "". At every word "" there is
+// a new cursor, so you can write multiple rows at once. Delete the word ""
 // and replace the explanation mark with a sad face.
 
-catchMeIfYouCan1 = 'You did not catch me!';
-catchMeIfYouCan2 = 'You did not catch me!';
-catchMeIfYouCan3 = 'You did not catch me!';
+catchMeIfYouCan1 = 'You did  catch me!';
+catchMeIfYouCan2 = 'You did  catch me!';
+catchMeIfYouCan3 = 'You did  catch me!';
 
 // d. Sometimes you want to move an entire line of code up or down. Of course
 // there is a shortcut for that: Alt-ArrowUp/Down. 
 
 // Order the lines below accordingly.
+console.log('1. I would like to go above.');
 console.log('2. I would like to go below.');
-console.log('1. I would like to go above.'); 
 
 // Great! To learn more about key bindings, see:
 // - https://code.visualstudio.com/docs/getstarted/keybindings
@@ -119,18 +119,18 @@ console.log('1. I would like to go above.');
 // Or check the keybindings link in the previous exercise to format only a
 // portion of the code.
 
-let a      = 1234;
+let a = 1234;
 a++;
-         if(a> 123) {
- a--;
-           }
-else    a++
-               console.log(a);
+if (a > 123) {
+    a--;
+}
+else a++
+console.log(a);
 
-// Nothing happened? 
+// hing happened? 
 // If so, your code (technically my code, if you just cloned it)
 // might have some errors. VS Code is a bit picky here, and 
-// does not touch code with errors. You will have to fix all the errors
+// does  touch code with errors. You will have to fix all the errors
 // first and come back here. Do it, it's worthy.
 
 // b. Can you grasp what the code is doing?
@@ -150,7 +150,7 @@ else    a++
 // if statement (it is the last parenthesis). Does the opening curly 
 // bracket get highlighted?
 
-if ((b+c) > 1) {
+if ((b + c) > 1) {
     console.log("Hei!");
 }
 
@@ -171,14 +171,14 @@ if ((b+c) > 1) {
 
 // b. Visualize the changes in this file, and if you are happy with them
 // your chages, "stage" them, i.e., add them to the git index.
-// Note: in VS Code you may stage and commmit at once, so that is steps b.
+// e: in VS Code you may stage and commmit at once, so that is steps b.
 // and c. together.
 
 // c. Add a proper "commit" message to describe your changes. Be concise.
 
 // d. Good! Your changes are saved. If you have the permissions, you will 
 // be able to push your code online, clicking on "Push Changes". 
-// If not, you might have cloned the main repo of the exercises, instead of 
+// If , you might have cloned the main repo of the exercises, instead of 
 // your forked copy.
 
 // EXERCISE 6. Code Runner.
@@ -206,8 +206,8 @@ for (let i = 0; i < 10; i++) {
 console.log('Mike drop.');
 
 // Did you get this error:
-// ReferenceError: outcome is not defined
-// Code runner does not remember the code previously executed, so
+// ReferenceError: outcome is  defined
+// Code runner does  remember the code previously executed, so
 // you need to highlight also the code that contains the definition of
 // the variable outcome at 6.a.
 
