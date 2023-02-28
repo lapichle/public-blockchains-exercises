@@ -60,7 +60,7 @@ function exit() {
     process.exit();
 }
 
-exit();
+//exit();
 
 // c. Bonus. Did you realize that JavaScript/Node.JS has three different ways
 // of declaring a function?
@@ -97,7 +97,7 @@ exercise = 1;
 
 require('dotenv').config();
 
-// exit();
+//exit();
 
 // Exercise 2. Create .env file.
 ////////////////////////////////
@@ -120,7 +120,7 @@ exercise = 2;
 // See if it worked.
 console.log(process.env);
 
-// exit();
+//exit();
 
 // Exercise 3. Check the content of the .env file.
 //////////////////////////////////////////////////
@@ -135,20 +135,15 @@ exercise = '3a';
 // Hint: https://javascript.info/ifelse
 
 // Your code here!
+require("dotenv").config();
+console.log(process.env.METAMASK_1_ADDRESS);
 
-if(process.env.METAMASK_ACCOUNT_1 == ""){
-    
-    console.log("Variable Missing!")
-
+let privateKey = process.env.METAMASK_PRIVATE_KEY;
+if (privateKey === "") {
+    console.log('Missing private key, fix your .env file');
 }
 
-
-else{
-    
-    console.log("Variable is there!")
-}
-
-exit();
+//exit();
 
 // b. Create an array with all the names of the variables written in the .env
 // file. Then print the lenght of the array.
@@ -163,8 +158,8 @@ let keys = ["INFURA_KEY", "INFURA_GOERLI_API_URL",
 "ALCHEMY_MAINNET_API_URL", "METAMASK_1_ADDRESS", "METAMASK_1_PRIVATE_KEY", 
 "METAMASK_2_ADDRESS", "METAMASK_2_PRIVATE_KEY", "ETHERSCAN_KEY"];
 
-print(keys.length)
-exit();
+console.log(keys.length)
+
 
 // c. Loop through all the elements of the array and check that the variable
 // is set and non-empty under `process.env`.
@@ -186,8 +181,11 @@ for (let key in keys) {
 
 
 // Solution 1. forEach.
-variablesToCheck.forEach(v => {
-    // Your code here!
+keys.forEach(v => {
+    if(!process.env[v]) {
+        console.log(process.env[v])
+        console.log(`Missing ${v}, fix your .env file`)
+    }
 });
 
 // Solution 2. For-loop.
