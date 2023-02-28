@@ -39,8 +39,8 @@
 // be executed, until you tell the process to stop. 
 
 // This line will tell the process to stop.
-process.exit(0);
-console.log('I am sad line...I will not be printed to console :(');
+//process.exit(0);
+//console.log('I am sad line...I will not be printed to console :(');
 
 // a. Move the sad line above and below `process.exit(0);` to check that the
 // process stops where it is intended to. When you are done, comment out both
@@ -54,6 +54,13 @@ console.log('I am sad line...I will not be printed to console :(');
 let exercise = 0;
 
 // Your code here!
+
+function exit() {
+    console.group("Process stops here, Exercise " + exercise);
+    process.exit();
+}
+
+exit();
 
 // c. Bonus. Did you realize that JavaScript/Node.JS has three different ways
 // of declaring a function?
@@ -129,7 +136,19 @@ exercise = '3a';
 
 // Your code here!
 
-// exit();
+if(process.env.METAMASK_ACCOUNT_1 == ""){
+    
+    console.log("Variable Missing!")
+
+}
+
+
+else{
+    
+    console.log("Variable is there!")
+}
+
+exit();
 
 // b. Create an array with all the names of the variables written in the .env
 // file. Then print the lenght of the array.
@@ -139,7 +158,13 @@ exercise = '3b';
 
 // Your code here!
 
-// exit();
+let keys = ["INFURA_KEY", "INFURA_GOERLI_API_URL", 
+"INFURA_MAINNET_API_URL", "ALCHEMY_KEY", "ALCHEMY_GOERLI_API_URL", 
+"ALCHEMY_MAINNET_API_URL", "METAMASK_1_ADDRESS", "METAMASK_1_PRIVATE_KEY", 
+"METAMASK_2_ADDRESS", "METAMASK_2_PRIVATE_KEY", "ETHERSCAN_KEY"];
+
+print(keys.length)
+exit();
 
 // c. Loop through all the elements of the array and check that the variable
 // is set and non-empty under `process.env`.
@@ -147,6 +172,17 @@ exercise = '3b';
 // Hint1: You can implement a for-loop or use the .forEach routine.
 // Hint2: `process.env` is an object, if you don't know how to access its 
 // field, read here: https://javascript.info/object
+
+for (key in process.env) {
+    // executes the body for each key among object properties
+  }
+
+for (let key in keys) {
+    // keys
+    alert( key );  
+    // values for the keys
+    alert(keys[key] ); 
+  }
 
 
 // Solution 1. forEach.
