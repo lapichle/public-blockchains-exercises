@@ -16,6 +16,8 @@
 require('dotenv').config();
 const ethers = require("ethers");
 
+const keys = require("./../../../keys.json")
+console.log(keys)
 
 // Exercise 1. Connect to Mainnet (a.k.a welcome async!).
 /////////////////////////////////////////////////////////
@@ -43,12 +45,12 @@ const ethers = require("ethers");
 // Hint: check EthersJS docs for the method `JsonRpcProvider` and what 
 // parameters it needs (nested hint: you need something from the .env file).
 
-const providerKey = process.env.INFURA_KEY;
-
-const mainnetInfuraUrl = `${process.env.INFURA_MAINNET}${providerKey}`;
-// console.log(mainnetInfuraUrl);
+const providerKey = keys.INFURA_KEY;
+console.log(keys)
+const mainnetInfuraUrl = `${keys.INFURA_MAINNET_API_URL}${providerKey}`;
+console.log(mainnetInfuraUrl);
 const mainnetProvider = new ethers.JsonRpcProvider(mainnetInfuraUrl);
-
+return
 // b. Verify that the network's name is "mainnet" and the chain id that theis 1.
 
 // Hint: the value of chain id returned by Ethers JS is of type "BigInt". 
@@ -77,7 +79,7 @@ const network = async () => {
 };
 
 // which you can then call:
-// network();
+network();
 
 // The second (less compact) notation has the advantage that we can invoke
 // the code only when needed, so it is preferred in this exercise sheet.
@@ -95,6 +97,8 @@ const network = async () => {
 // Checkpoint. We use `return` to terminate the execution insted
 // of process.exit(). Why?
 // return;
+//return will only stop the function that contains the return statement. process.exit will stop all the running functions and stop all the tasks.
+//So when you call return it will stop the current function but execute the remaining functions.
 
 
 
@@ -120,8 +124,8 @@ const blockNum = async () => {
 // Connect to the Goerli test net, get the latest block number and print
 // the difference in chain length with mainnet.
 
-const goerliInfuraUrl = `${process.env.INFURA_GOERLI}${providerKey}`;
-// console.log(goerliInfuraUrl);
+const goerliInfuraUrl = `${process.env.INFURA_GOERLI_API_URL}${providerKey}`;
+console.log(goerliInfuraUrl);
 const goerliProvider = new ethers.JsonRpcProvider(goerliInfuraUrl);
 
 
@@ -170,7 +174,7 @@ const checkBlockTime = async (providerName = "mainnet", blocks2check = 3) => {
     // Keep track of how many blocks to check.
     let blocksChecked = 0;
 
-    // Poll the blockchain every second to check for a new block number.
+    // Pull the blockchain every second to check for a new block number.
     let myInterval = setInterval(async () => {
 
         let newBlockNumber = await provider.getBlockNumber();
@@ -241,7 +245,7 @@ const checkBlockTime2 = async (providerName = "mainnet", blocks2check = 3) => {
 
 // c. Now that you know the answer, you can check the 
 // "Ethereum Average Block Time Chart": https://etherscan.io/chart/blocktime
-
+// shows the historical average time taken in seconds for a block to be included in the Ethereum blockchain
 
 // Exercise 4. Block info.
 //////////////////////////
@@ -314,7 +318,7 @@ const balance = async (ensName = "unima.eth") => {
 
     // Get the balance for "unima.eth".
     let bal = await goerliProvider.getBalance(ensName);
-    // console.log(bal);
+    //console.log(bal);
 
     // Nicely formatted.
     console.log(ensName, "has", ethers.formatEther(bal), "ETH");
@@ -364,6 +368,6 @@ const link = async () => {
 };
 
 
-// link();
+link();
 
 

@@ -6,7 +6,7 @@
 // variety of types of payloads.
 
 // The private key may be located in memory (using a Wallet) or protected via
-// some IPC layer, such as MetaMask which proxies interaction from a website to
+// some IPC layer (The transport layer is responsible for platform-specific code for communication and shared memory, connection establishment, identifying), such as MetaMask which proxies interaction from a website to
 // a browser plug-in, which keeps the private key out of the reach of the 
 // website and only permits interaction after requesting permission from the
 // user and receiving authorization.
@@ -21,12 +21,13 @@
 
 require('dotenv').config();
 const ethers = require("ethers");
-
+const keys = require("./../../../keys.json")
+console.log(keys)
 // b. Create a Goerli provider.
 
-const providerKey = process.env.INFURA_KEY;
+const providerKey = keys.INFURA_KEY;
 
-const goerliInfuraUrl = `${process.env.INFURA_GOERLI}${providerKey}`;
+const goerliInfuraUrl = `${keys.INFURA_GOERLI_API_URL}${providerKey}`;
 const goerliProvider = new ethers.JsonRpcProvider(goerliInfuraUrl);
 
 // Exercise 1. Create a Signer.
@@ -43,7 +44,7 @@ const goerliProvider = new ethers.JsonRpcProvider(goerliInfuraUrl);
 // Hint: a signer is a wallet.
 // Hint2: if you get an error here, check that the private key begins with "0x".
 
-let signer = new ethers.Wallet(process.env.METAMASK_1_PRIVATE_KEY);
+let signer = new ethers.Wallet(keys.METAMASK_1_PRIVATE_KEY);
 console.log(signer.address);
 
 // Exercise 2. Sign something.
@@ -83,7 +84,7 @@ const sign = async (message = 'Hello world') => {
 // a. Connect the signer to the Goerli network.
 // Hint: .connect()
 
-// b. Print the next nonce necessary to send a transaction.
+// b. Print the next nonce (Nonce is basically an abbreviation for “number used once”) necessary to send a transaction.
 // Hint: .getNonce()
 
 const connect = async() => {
@@ -105,7 +106,7 @@ const connect = async() => {
 // and the remaning of the exercises. If unclear, just check the solution :)
 
 // Replace the signer created above.
-signer = new ethers.Wallet(process.env.METAMASK_1_PRIVATE_KEY, goerliProvider);
+signer = new ethers.Wallet(keys.METAMASK_1_PRIVATE_KEY, goerliProvider);
 
 
 // Exercise 4. Send a transaction.
@@ -125,7 +126,7 @@ signer = new ethers.Wallet(process.env.METAMASK_1_PRIVATE_KEY, goerliProvider);
 // Hint: `sendTransaction()` returns an object with a `wait()` method.
 // Hint2: `formatEther()` can print a nicer balance.
 
-const account2 = process.env.METAMASK_2_ADDRESS;
+const account2 = keys.METAMASK_2_ADDRESS;
 
 const sendTransaction = async () => {
 
@@ -155,7 +156,7 @@ const sendTransaction = async () => {
     console.log('Balance for', account2, 'changed from', b2, 'to', updatedB2);
 };
 
-// sendTransaction();
+sendTransaction();
 
 
 // Exercise 5. Meddling with Gas.
@@ -167,7 +168,7 @@ const sendTransaction = async () => {
 // First we need to understand how gas works in Ethereum. 
 
 // Begin long intro.
-
+// Gas is the pricing value required to conduct a transaction or execute a contract on the Ethereum blockchain platform.
 // A big update happened with EIP-1559, which completely re-designed how
 // gas fees are computed and used.
 
@@ -320,7 +321,7 @@ const sendCheaperTransaction = async () => {
 
 // Hint: if you don't know the nonce, `getNonce` will tell you the _next_ one.
 // Hint2: if there is a transaction in the mempool, `getNonce` will give 
-// give the current nonce (same as transaction in the mempool). Try "pending"
+// the current nonce (same as transaction in the mempool). Try "pending"
 // as input paramter if you need the _next_ one. 
 // Hint3: if you don't know what a reasonable `maxFeePerGas` is, you can 
 // get an idea calling `getFeeData()`.

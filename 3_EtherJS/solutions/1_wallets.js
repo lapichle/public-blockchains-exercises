@@ -141,7 +141,7 @@ exercise = '3a';
 
 // a. Check that the variable METAMASK_ACCOUNT_1 is not empty. Write an 
 // if statement that print a warning message if empty.
-console.log(process.env.METAMASK_ACCOUNT_1);
+console.log(process.env.METAMASK_ADDRESS_1);
 
 let privateKey = process.env.METAMASK_PRIVATE_KEY;
 if (privateKey === "") {

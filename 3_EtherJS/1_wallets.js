@@ -140,7 +140,7 @@ exercise = '3a';
 require("dotenv").config();
 console.log(process.env.METAMASK_1_ADDRESS);
 
-let privateKey = process.env.METAMASK_PRIVATE_KEY;
+let privateKey = process.env.METAMASK_1_PRIVATE_KEY;
 if (privateKey === "") {
     console.log('Missing private key, fix your .env file');
 }
@@ -170,16 +170,13 @@ console.log(keys.length)
 // Hint2: `process.env` is an object, if you don't know how to access its 
 // field, read here: https://javascript.info/object
 
-for (key in process.env) {
-    // executes the body for each key among object properties
-  }
-
-for (let key in keys) {
-    // keys
-    alert( key );  
-    // values for the keys
-    alert(keys[key] ); 
-  }
+for (let index = 0; index < keys.length; index++) {
+    const v = keys[index];
+    if (!process.env[v]) {
+        console.log(process.env[v])
+        console.log(`Missing ${v}, fix your .env file`);
+    }
+}
 
 
 // Solution 1. forEach.
@@ -208,6 +205,13 @@ const ethers = require("ethers");
 // and the mnenomic phrase.
 // Hint: ethers.Wallet.createRandom();
 
+const wallet = ethers.Wallet.createRandom();
+
+console.log();
+console.log("Address:", wallet.address);
+console.log("Private key:", wallet.privateKey);
+console.log("Mnemonic:", wallet.mnemonic.phrase);
+console.log();
 
 // exit();
 
@@ -244,5 +248,14 @@ exercise = 5;
 // Hint: You need to append an index to the derivation path.
 
 // Your code here!
+let mnemonic = wallet.mnemonic.phrase;
+
+let path, myWallet;
+for (let i = 0; i < 10; i++) {
+  path = `${baseDevPath}${i}`;
+  myWallet = ethers.HDNodeWallet.fromPhrase(mnemonic, path);
+  console.log("Address", i, myWallet.address);
+  console.log("Private key", i, myWallet.privateKey);
+}
 
 // exit();
