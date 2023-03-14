@@ -9,6 +9,7 @@
 
 require('dotenv').config();
 const ethers = require("ethers");
+const keys = require("./../../../keys.json")
 
 // Exercise 1. Create a JSON RPC Provider for the (not) UniMa Blockchain.
 /////////////////////////////////////////////////////////////////////////
@@ -26,9 +27,9 @@ const ethers = require("ethers");
 // b. Create the JSON RPC provider object.
 // Hint: only accessible within UniMa network.
 
-const notUniMaUrl = process.env.NOT_UNIMA_URL_1;
+const notUniMaUrl = keys.NOT_UNIMA_URL_1;
 const notUniMaProvider = new ethers.JsonRpcProvider(notUniMaUrl);
-
+//console.log(keys)
 // Exercise 2. Let's query the provider.
 ////////////////////////////////////////
 
@@ -45,7 +46,7 @@ const networkInfo = async () => {
     console.log('Block number: ', blockNumber);
 };
 
-// networkInfo();
+networkInfo();
 
 
 // Exercise 3. Connect a signer to the (not) UniMa blockchain.
@@ -54,7 +55,7 @@ const networkInfo = async () => {
 // a. Use the same non-sensitive private key used in 3_signer.js.
 
 
-const signer = new ethers.Wallet(process.env.METAMASK_1_PRIVATE_KEY,
+const signer = new ethers.Wallet(keys.METAMASK_1_PRIVATE_KEY,
                                  notUniMaProvider);
 
 // b. Print the next nonce necessary to send a transaction.
@@ -66,7 +67,7 @@ const getNonce = async() => {
     console.log('Your nonce is ' + nonce);
 };
 
-// getNonce();
+getNonce();
 
 // Checkpoint. Is the nonce in the (not) Unima blockchain different
 // than in Goerli?
@@ -88,14 +89,14 @@ const checkBalance = async () => {
     console.log('My balance is ' + ethers.formatEther(balance) + ' NUMETH.');
 };
 
-// checkBalance();
+checkBalance();
 
 // Exercise 5. Send a transaction.
 //////////////////////////////////
 
 // Send some Ether from one of your accounts to another one on NUMA.
 
-const account2 = process.env.METAMASK_2_ADDRESS;
+const account2 = keys.METAMASK_2_ADDRESS;
 
 const sendTransaction = async () => {
 
@@ -125,7 +126,7 @@ const sendTransaction = async () => {
     console.log('Balance for', account2, 'changed from', b2, 'to', updatedB2);
 };
 
-// sendTransaction();
+sendTransaction();
 
 // Checkpoint. Can you send your ETH from NUMA to Goerli?
 
