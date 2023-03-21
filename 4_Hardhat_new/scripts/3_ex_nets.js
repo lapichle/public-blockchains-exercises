@@ -12,6 +12,8 @@
 // the instructions here:
 // https://hardhat.org/hardhat-runner/docs/config
 
+
+
 // You should import the configuration from the .env file.
 
 // Exercise 2. Deploy the Lock2 contract to Goerli.

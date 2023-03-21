@@ -8,7 +8,9 @@
 //////////////////////////////////////////
 
 // Text below taken from official hardhat template:
-
+// Hardhat is a Ethereum development environment -
+// Solidity ist eine objektorientierte, anwendungsspezifische 
+// höhere Programmiersprache zum Entwickeln von Smart Contracts für Blockchain-Plattformen wie Ethereum 
 // We require the Hardhat Runtime Environment explicitly here. This is optional
 // but useful for running the script in a standalone fashion through `node <script>`.
 //

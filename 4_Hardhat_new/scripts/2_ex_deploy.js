@@ -37,8 +37,8 @@ return;
 
 // a. Require ethers and print the version of Ethers, just to be sure.
 
-// Your code here!
-
+const ethers = require("ethers");
+console.log("Ethers version:", ethers.version);
 return;
 
 // b. Hardhat uses v5 because it offers a plugin that is a wrapped version of
@@ -46,7 +46,7 @@ return;
 // hre.ethers (require statement above).
 // Print the version of this plugin, it should be the same as above.
 
-// Your code here!
+console.log("HH Wrapped Ethers version:", hre.ethers.version);
 
 return;
 
@@ -82,7 +82,7 @@ return;
 // a. Update with your contract's name and address.
 // Hint: The address is known only after deployment.
 const contractName = "Lock2";
-const contractAddress = "FILL_THIS_VALUE";
+const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
 
 // Let's continue inside the async main function (the recommended Hardhat
 // pattern of execution).
@@ -90,11 +90,14 @@ const contractAddress = "FILL_THIS_VALUE";
 async function main() {
   
   // b. Get the first of the default Hardhat signers. Print its address, and
-  // checks that it matches the first address printed to console when you
+  // check that it matches the first address printed to console when you
   // execute: npx hardhat node
   // Hint: hre.ethers.getSigners() returns an array.
 
-  // Your code here!
+const hardhatSigners = await hre.ethers.getSigners();
+const hhSigner = hardhatSigners[0];
+
+console.log("HH Signer address:", hhSigner.address);
 
   return;
 
@@ -103,7 +106,12 @@ async function main() {
   // hre.ethers.getContractAt(<name>, <address>, <signer>)
   // then print the contract address.
 
-  // Your code here!
+const lock = await hre.ethers.getContractAt(contractName,
+                                              contractAddress,
+                                              hhSigner);  
+
+
+console.log(contractName + " address", lock.address);
 
   return;
 
@@ -114,14 +122,20 @@ async function main() {
   const getContractManual = async(signer = hhSigner, 
                                   address = contractAddress) => {
     
-    // d.1 Fetch the ABI from the artifacts 
+    // d.1 Fetch the ABI (Application Binary Interface) from the artifacts 
     // (it expects contract name = file name).
-
-    // Your code here!
+  const lock2ABI = require("../artifacts/contracts/" + contractName + 
+                              ".sol/" + contractName + ".json").abi;
 
     // d.2 Create the contract and print the address.
 
-    // Your code here!
+    const lock = new ethers.Contract(address, lock2ABI, signer);
+
+    console.log(contractName + " address standard Ethers", lock.address);
+
+    return lock;
+
+  };
 
     // const lock = ... ;
 
@@ -137,18 +151,25 @@ async function main() {
   const readContract = async (lockContract = lock) => {
       
     // Print the owner of the lock.
-   
-    // Your code here!
+    const owner = await lock.owner();
+    console.log("Owner of " + contractName, owner);
 
+    
     // Print the unlock time. 
+    let unlockTime = await lock.unlockTime();
+    unlockTime = Number(unlockTime);
+    console.log(contractName + " unlock timestamp:", unlockTime);
+    let date = new Date((unlockTime * 1000));
+    console.log(contractName + " unlock date:", date);
+  };
+
     // Be careful! You will get a BigInt, you need first
     // to convert it to a Number and then to a Date so that it is readable.
     // For the conversions these threads might help:
     // https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
     // https://stackoverflow.com/questions/53970655/how-to-convert-bigint-to-number-in-javascript
 
-    // Your code here!
-  };
+ 
 
   // await readContract();
 
@@ -164,8 +185,17 @@ async function main() {
   // the reason why.
 
   const withdrawAttempt1 = async (lockContract = lock) => {
-        
-    // Your code here!
+    let b1 = await hhSigner.getBalance();
+  // V5 Syntax for accessing formatEther.
+    b1 = ethers.utils.formatEther(b1);
+    console.log('The balance before withdrawing is ', b1);
+
+    console.log("Withdrawing fom Lock");
+    await lockContract.withdraw();
+
+    let b2 = await hhSigner.getBalance();
+    b2 = ethers.utils.formatEther(b2);
+    console.log('The balance after withdrawing is ', b2);
   };
 
   // await withdrawAttempt1();
