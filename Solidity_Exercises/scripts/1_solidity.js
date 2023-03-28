@@ -44,18 +44,28 @@
 // a. What is the meaning of the `pragma` directive at the top of the file?
 // Hint: https://solidity-by-example.org/hello-world/
 
+//pragma specifies the compiler version of Solidity 
+
 // b. The pragma value must be compatible with the version of solidity
 // in `hardhat.config.js. Try to set the value to a lower or higher number
 // and to compile the Lock file. What happens?
 // Hint: npx hardhat compile
 
+//solidity: "0.8.18" -  0.8.17 and less than 0.9.0 
+// There is a ParseError 
+
 // c. Checkpoint. What is the meaning of that caret symbol (^) ?
 // Hint: https://docs.soliditylang.org/en/develop/layout-of-source-files.html#version-pragma
 // Hint2: https://bytearcher.com/articles/semver-explained-why-theres-a-caret-in-my-package-json/
 
+//The source file does not work on a compiler starting from version 0.6.0
+
 // c. Before `pragma` there is an important comment tha sets the license of
 // the contract. Pick a license for your contract.
 // Hint: https://docs.soliditylang.org/en/develop/layout-of-source-files.html#spdx-license-identifier
+
+//Every source file should start with a comment indicating its license 
+//SPDX-License-Identifier: MIT
 
 // d. The code of the Lock contract is introduced by the `contract` keyword
 // and wrapped in curly braces { ... }. Before `contract` you have the option
